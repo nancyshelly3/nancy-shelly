@@ -1,0 +1,3589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nancy Shelly | Book Specialist Marketer - Author Visibility Architecture™</title>
+    <meta name="description" content="Transform your book from invisible to unavoidable. Professional Author Visibility Architecture™ that turns books into bestsellers.">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS VARIABLES & ROOT
+           ============================================ */
+        :root {
+            --primary: #1a1a2e;
+            --primary-light: #16213e;
+            --accent: #c9a96e;
+            --accent-light: #d4b97a;
+            --accent-dark: #b8944f;
+            --accent-glow: rgba(201, 169, 110, 0.3);
+            --gold: #c9a96e;
+            --gold-light: #e8d5a8;
+            --dark: #0a0a14;
+            --dark-secondary: #12121e;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0c8;
+            --text-muted: #6c6c8a;
+            --bg-card: rgba(26, 26, 46, 0.6);
+            --bg-card-hover: rgba(30, 30, 55, 0.8);
+            --border-subtle: rgba(201, 169, 110, 0.15);
+            --border-accent: rgba(201, 169, 110, 0.4);
+            --gradient-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --gradient-accent: linear-gradient(135deg, #c9a96e 0%, #d4b97a 50%, #e8d5a8 100%);
+            --gradient-dark: linear-gradient(180deg, #0a0a14 0%, #1a1a2e 100%);
+            --shadow-gold: 0 0 30px rgba(201, 169, 110, 0.2);
+            --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --shadow-card-hover: 0 30px 80px rgba(0, 0, 0, 0.4);
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* ============================================
+           PRELOADER
+           ============================================ */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            margin-bottom: 30px;
+            animation: preloaderPulse 2s ease-in-out infinite;
+        }
+
+        .preloader-text {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            animation: preloaderFade 1.5s ease-in-out infinite;
+        }
+
+        .preloader-bar-container {
+            width: 280px;
+            height: 3px;
+            background: rgba(201, 169, 110, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .preloader-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--gradient-accent);
+            border-radius: 10px;
+            animation: preloaderProgress 2s ease-in-out forwards;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(201, 169, 110, 0); }
+        }
+
+        @keyframes preloaderFade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes preloaderProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* ============================================
+           GLOBAL RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-smooth);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ============================================
+           CUSTOM CURSOR
+           ============================================ */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-ring {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(201, 169, 110, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99997;
+            transition: all 0.15s ease-out;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-ring.hover {
+            width: 60px;
+            height: 60px;
+            border-color: var(--accent);
+            background: rgba(201, 169, 110, 0.1);
+        }
+
+        /* ============================================
+           FLOATING PARTICLES
+           ============================================ */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(201, 169, 110, 0.3);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            background: transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+        }
+
+        .nav-logo-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-logo:hover .nav-logo-img {
+            box-shadow: var(--shadow-gold);
+            transform: scale(1.05);
+        }
+
+        .nav-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-logo-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .nav-logo-title {
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            position: relative;
+            padding: 5px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: transparent;
+            color: var(--accent) !important;
+            border: 1.5px solid var(--accent);
+            padding: 10px 24px !important;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            font-size: 0.85rem !important;
+            letter-spacing: 0.5px;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-cta:hover {
+            background: var(--accent) !important;
+            color: var(--dark) !important;
+            box-shadow: var(--shadow-gold);
+            transform: translateY(-2px);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition-smooth);
+            border-radius: 10px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 20, 0.98);
+            backdrop-filter: blur(30px);
+            z-index: 999;
+            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: var(--transition-smooth);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 140px 0 100px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 20% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(15, 52, 96, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 80%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to top, var(--dark), transparent);
+            z-index: 1;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 640px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid var(--border-subtle);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge i {
+            font-size: 0.7rem;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+        }
+
+        .hero-title .highlight {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--gradient-accent);
+            color: var(--dark);
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: var(--transition-smooth);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 169, 110, 0.3);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: transparent;
+            color: var(--accent);
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            border: 1.5px solid var(--accent);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(201, 169, 110, 0.1);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .hero-trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .hero-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .hero-trust-item i {
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+
+        /* Hero Image */
+        .hero-image-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 420px;
+            height: 500px;
+        }
+
+        .hero-image-bg {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--border-accent);
+            border-radius: 20px;
+        }
+
+        .hero-image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .hero-floating-badge {
+            position: absolute;
+            background: rgba(10, 10, 20, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 18px 22px;
+            z-index: 5;
+        }
+
+        .hero-badge-1 {
+            top: -20px;
+            right: -30px;
+            animation: floatBadge 4s ease-in-out infinite;
+        }
+
+        .hero-badge-2 {
+            bottom: 40px;
+            left: -40px;
+            animation: floatBadge 5s ease-in-out infinite 1s;
+        }
+
+        .hero-badge-3 {
+            bottom: -20px;
+            right: 30px;
+            animation: floatBadge 4.5s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .hero-floating-badge .badge-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .hero-floating-badge .badge-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* ============================================
+           SECTION STYLES (shared)
+           ============================================ */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(201, 169, 110, 0.08);
+            border: 1px solid var(--border-subtle);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-title .highlight {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 3px;
+            background: var(--gradient-accent);
+            border-radius: 10px;
+            margin: 25px auto 0;
+        }
+
+        /* ============================================
+           PROBLEM SECTION
+           ============================================ */
+        .problems-section {
+            background: var(--dark-secondary);
+        }
+
+        .problems-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 70% 30%, rgba(201, 169, 110, 0.04) 0%, transparent 50%);
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 45px 40px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-accent);
+            box-shadow: var(--shadow-card-hover);
+        }
+
+        .problem-card:hover::before {
+            opacity: 1;
+        }
+
+        .problem-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 25px;
+            transition: var(--transition-smooth);
+        }
+
+        .problem-card:hover .problem-icon {
+            background: var(--accent);
+            color: var(--dark);
+            transform: rotate(-5deg) scale(1.05);
+        }
+
+        .problem-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .problem-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .problem-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .problem-card-full {
+            grid-column: 1 / -1;
+        }
+
+        /* ============================================
+           VISIBILITY GAPS
+           ============================================ */
+        .visibility-section {
+            background: var(--dark);
+        }
+
+        .visibility-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .visibility-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), rgba(201, 169, 110, 0.1));
+            transform: translateX(-50%);
+        }
+
+        .gap-item {
+            display: flex;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .gap-item:nth-child(odd) {
+            justify-content: flex-start;
+            padding-right: calc(50% + 40px);
+        }
+
+        .gap-item:nth-child(even) {
+            justify-content: flex-end;
+            padding-left: calc(50% + 40px);
+        }
+
+        .gap-dot {
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            width: 18px;
+            height: 18px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            border: 4px solid var(--dark);
+            z-index: 2;
+            box-shadow: 0 0 0 4px rgba(201, 169, 110, 0.2);
+        }
+
+        .gap-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 35px;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+        }
+
+        .gap-content:hover {
+            border-color: var(--border-accent);
+            box-shadow: var(--shadow-card);
+            transform: translateY(-5px);
+        }
+
+        .gap-number {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .gap-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .gap-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           NANCY SHOWCASE / ABOUT
+           ============================================ */
+        .about-section {
+            background: var(--dark-secondary);
+            overflow: hidden;
+        }
+
+        .about-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .about-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(10, 10, 20, 0.95), transparent);
+        }
+
+        .about-image-overlay h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .about-image-overlay p {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        .about-content h3 .highlight {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .about-stat {
+            text-align: center;
+            padding: 25px 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            transition: var(--transition-smooth);
+        }
+
+        .about-stat:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-5px);
+        }
+
+        .about-stat .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .about-stat .stat-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        /* ============================================
+           INFRASTRUCTURE APPROACH
+           ============================================ */
+        .infrastructure-section {
+            background: var(--dark);
+        }
+
+        .infra-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .infra-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 45px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .infra-card.wrong {
+            border-color: rgba(255, 82, 82, 0.2);
+        }
+
+        .infra-card.wrong .infra-card-badge {
+            background: rgba(255, 82, 82, 0.1);
+            color: #ff5252;
+            border-color: rgba(255, 82, 82, 0.3);
+        }
+
+        .infra-card.right {
+            border-color: rgba(201, 169, 110, 0.3);
+        }
+
+        .infra-card.right .infra-card-badge {
+            background: rgba(201, 169, 110, 0.1);
+            color: var(--accent);
+            border-color: var(--border-accent);
+        }
+
+        .infra-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .infra-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid;
+            margin-bottom: 25px;
+        }
+
+        .infra-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .infra-list {
+            list-style: none;
+        }
+
+        .infra-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        .infra-list li i {
+            margin-top: 4px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .infra-card.wrong .infra-list li i {
+            color: #ff5252;
+        }
+
+        .infra-card.right .infra-list li i {
+            color: var(--accent);
+        }
+
+        /* Layers */
+        .infra-layers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .infra-layer {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 35px 30px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .infra-layer:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .infra-layer-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin: 0 auto 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .infra-layer:hover .infra-layer-icon {
+            background: var(--accent);
+            color: var(--dark);
+            transform: scale(1.1);
+        }
+
+        .infra-layer h5 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .infra-layer p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           FEATURED AUTHORS
+           ============================================ */
+        .featured-section {
+            background: var(--dark-secondary);
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
+        }
+
+        .featured-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--border-accent);
+            box-shadow: var(--shadow-card-hover);
+        }
+
+        .featured-card-header {
+            padding: 35px 30px 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .featured-author-img-wrapper {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .featured-author-img-wrapper:hover {
+            transform: scale(1.08);
+        }
+
+        .featured-author-img-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            z-index: 0;
+        }
+
+        .featured-author-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .featured-author-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .featured-author-email {
+            font-size: 0.78rem;
+            color: var(--accent);
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        .featured-author-email i {
+            margin-right: 5px;
+        }
+
+        .featured-book-wrapper {
+            padding: 0 30px 20px;
+            text-align: center;
+        }
+
+        .featured-book-img-link {
+            display: inline-block;
+            transition: var(--transition-smooth);
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .featured-book-img-link:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .featured-book-img {
+            width: 180px;
+            height: 270px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .featured-amazon-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            padding: 10px 22px;
+            background: #ff9900;
+            color: #111;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            transition: var(--transition-smooth);
+        }
+
+        .featured-amazon-btn:hover {
+            background: #ffad33;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 153, 0, 0.3);
+        }
+
+        .featured-amazon-btn img {
+            width: 18px;
+            height: 18px;
+        }
+
+        .featured-card-footer {
+            padding: 20px 30px 30px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .featured-testimonial {
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            line-height: 1.7;
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .featured-stars {
+            color: #ffc107;
+            font-size: 0.85rem;
+            margin-top: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* ============================================
+           HOW IT WORKS
+           ============================================ */
+        .process-section {
+            background: var(--dark);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .process-step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .process-step:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-accent);
+            box-shadow: var(--shadow-card);
+        }
+
+        .process-step-number {
+            width: 55px;
+            height: 55px;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1.5px solid var(--border-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 22px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent);
+            transition: var(--transition-smooth);
+        }
+
+        .process-step:hover .process-step-number {
+            background: var(--accent);
+            color: var(--dark);
+            transform: scale(1.1);
+        }
+
+        .process-step h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .process-step-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+
+        .process-email-note {
+            text-align: center;
+            padding: 30px;
+            background: rgba(201, 169, 110, 0.05);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+        }
+
+        .process-email-note p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .process-email-note i {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        .process-email-note strong {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           NANCY QUOTE / PHILOSOPHY
+           ============================================ */
+        .philosophy-section {
+            background: var(--dark-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(201, 169, 110, 0.06) 0%, transparent 60%);
+        }
+
+        .philosophy-inner {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .philosophy-image {
+            flex-shrink: 0;
+            width: 300px;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border-subtle);
+            box-shadow: var(--shadow-card);
+        }
+
+        .philosophy-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .philosophy-content {
+            flex: 1;
+        }
+
+        .philosophy-quote {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 30px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .philosophy-quote::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--accent);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            opacity: 0.3;
+        }
+
+        .philosophy-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .philosophy-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .philosophy-author-info h5 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .philosophy-author-info span {
+            font-size: 0.82rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           FAQ SECTION
+           ============================================ */
+        .faq-section {
+            background: var(--dark);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-accent);
+        }
+
+        .faq-item.active {
+            border-color: var(--border-accent);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .faq-question {
+            padding: 22px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .faq-question h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .faq-toggle {
+            width: 35px;
+            height: 35px;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .faq-item.active .faq-toggle {
+            background: var(--accent);
+            color: var(--dark);
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .faq-answer-inner {
+            padding: 0 30px 25px;
+        }
+
+        .faq-answer-inner p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ============================================
+           CONTACT / CTA SECTION
+           ============================================ */
+        .contact-section {
+            background: var(--dark-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 50% 0%, rgba(201, 169, 110, 0.08) 0%, transparent 50%);
+        }
+
+        .contact-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .contact-info h3 .highlight {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-info > p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 35px;
+        }
+
+        .contact-details {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-details li i {
+            width: 45px;
+            height: 45px;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details li strong {
+            color: var(--text-primary);
+        }
+
+        .contact-nancy-card {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 22px;
+        }
+
+        .contact-nancy-card img {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .contact-nancy-card h5 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .contact-nancy-card span {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .contact-nancy-card p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        /* Contact Form */
+        .contact-form-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 45px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-form-wrapper h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .contact-form-wrapper > p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(10, 10, 20, 0.5);
+            border: 1.5px solid var(--border-subtle);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c9a96e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        .form-group select option {
+            background: var(--dark);
+            color: var(--text-primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient-accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 169, 110, 0.3);
+        }
+
+        .form-note {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .form-note i {
+            color: var(--accent);
+            margin-right: 5px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background: var(--dark);
+            padding: 80px 0 30px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand {
+            max-width: 400px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .footer-logo-text h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .footer-logo-text span {
+            font-size: 0.72rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 42px;
+            height: 42px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-social a:hover {
+            background: var(--accent);
+            color: var(--dark);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h5 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 14px;
+        }
+
+        .footer-column ul li a {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-column ul li a i {
+            font-size: 0.7rem;
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-bottom p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-bottom-links a {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           SCROLL TO TOP
+           ============================================ */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(201, 169, 110, 0.4);
+        }
+
+        /* ============================================
+           TRUST BAR
+           ============================================ */
+        .trust-bar {
+            background: rgba(201, 169, 110, 0.05);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 25px 0;
+            overflow: hidden;
+        }
+
+        .trust-bar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .trust-item i {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        /* ============================================
+           COUNTERS ANIMATION
+           ============================================ */
+        .counter {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-cta-group {
+                justify-content: center;
+            }
+
+            .hero-trust {
+                justify-content: center;
+            }
+
+            .hero-image-container {
+                width: 350px;
+                height: 420px;
+                margin: 0 auto;
+            }
+
+            .hero-badge-1 { right: -10px; }
+            .hero-badge-2 { left: -10px; }
+
+            .about-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .problems-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .infra-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .infra-layers {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                margin: 0 auto;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto 60px;
+            }
+
+            .philosophy-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .philosophy-quote {
+                border-left: none;
+                padding-left: 0;
+                border-top: 4px solid var(--accent);
+                padding-top: 30px;
+            }
+
+            .contact-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+
+            .hero {
+                padding: 120px 0 80px;
+            }
+
+            .hero-title {
+                font-size: 2.3rem;
+            }
+
+            .hero-image-container {
+                width: 280px;
+                height: 350px;
+            }
+
+            .hero-floating-badge {
+                padding: 12px 16px;
+            }
+
+            .hero-floating-badge .badge-number {
+                font-size: 1.2rem;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+
+            .infra-layers {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .visibility-timeline::before {
+                left: 20px;
+            }
+
+            .gap-item:nth-child(odd),
+            .gap-item:nth-child(even) {
+                padding-left: 55px;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+
+            .gap-dot {
+                left: 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cursor-dot, .cursor-ring {
+                display: none;
+            }
+
+            .trust-bar-inner {
+                gap: 25px;
+            }
+
+            .philosophy-image {
+                width: 250px;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.9rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image-container {
+                width: 250px;
+                height: 310px;
+            }
+
+            .hero-badge-2, .hero-badge-3 {
+                display: none;
+            }
+
+            .contact-form-wrapper {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================
+         PRELOADER
+         ============================================ -->
+    <div class="preloader" id="preloader">
+        <img src="Nancy..jpg" alt="Nancy Shelly" class="preloader-logo">
+        <div class="preloader-text">Nancy Shelly</div>
+        <div class="preloader-bar-container">
+            <div class="preloader-bar"></div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         CUSTOM CURSOR
+         ============================================ -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- ============================================
+         FLOATING PARTICLES
+         ============================================ -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- ============================================
+         NAVIGATION
+         ============================================ -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#" class="nav-logo">
+                    <img src="Nancy..jpg" alt="Nancy Shelly" class="nav-logo-img">
+                    <div class="nav-logo-text">
+                        <span class="nav-logo-name">Nancy Shelly</span>
+                        <span class="nav-logo-title">Book Specialist Marketer</span>
+                    </div>
+                </a>
+
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#problems">The Problem</a></li>
+                    <li><a href="#infrastructure">Infrastructure</a></li>
+                    <li><a href="#authors">Featured Authors</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
+                </ul>
+
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#about" onclick="closeMobileNav()">About</a>
+        <a href="#problems" onclick="closeMobileNav()">The Problem</a>
+        <a href="#infrastructure" onclick="closeMobileNav()">Infrastructure</a>
+        <a href="#authors" onclick="closeMobileNav()">Featured Authors</a>
+        <a href="#process" onclick="closeMobileNav()">Process</a>
+        <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+        <a href="#contact" onclick="closeMobileNav()">Get In Touch</a>
+    </div>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="hero-badge" data-aos="fade-down" data-aos-delay="200">
+                        <i class="fas fa-star"></i>
+                        For Serious Authors Ready to Build a Real Readership
+                    </div>
+
+                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">
+                        Transform Your Book From Invisible to
+                        <span class="highlight">Unavoidable</span>
+                    </h1>
+
+                    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="500">
+                        I build Author Visibility Architecture™ — permanent systems that position your book in front of thousands of ideal readers every single month.
+                    </p>
+
+                    <p class="hero-description" data-aos="fade-up" data-aos-delay="600">
+                        Most authors fail not because their books aren't good enough, but because they're invisible. The publishing landscape has fundamentally changed. Visibility is a system, not an event. It's engineered, not hoped for. I don't run book promotions — I build permanent infrastructure that sells while you sleep.
+                    </p>
+
+                    <div class="hero-cta-group" data-aos="fade-up" data-aos-delay="700">
+                        <a href="#contact" class="btn-primary">
+                            <i class="fas fa-chart-line"></i>
+                            Analyze My Visibility Gap
+                        </a>
+                        <a href="#authors" class="btn-secondary">
+                            <i class="fas fa-users"></i>
+                            See Featured Authors
+                        </a>
+                    </div>
+
+                    <div class="hero-trust" data-aos="fade-up" data-aos-delay="800">
+                        <div class="hero-trust-item">
+                            <i class="fas fa-check-circle"></i>
+                            47.3M+ Reader Impressions
+                        </div>
+                        <div class="hero-trust-item">
+                            <i class="fas fa-check-circle"></i>
+                            94% Client Retention
+                        </div>
+                        <div class="hero-trust-item">
+                            <i class="fas fa-check-circle"></i>
+                            340% Average ROI
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-image-wrapper" data-aos="fade-left" data-aos-delay="500">
+                    <div class="hero-image-container">
+                        <div class="hero-image-bg"></div>
+                        <div class="hero-image">
+                            <img src="Nancy..jpg" alt="Nancy Shelly - Book Specialist Marketer">
+                        </div>
+
+                        <div class="hero-floating-badge hero-badge-1">
+                            <div class="badge-number">47M+</div>
+                            <div class="badge-label">Reader Impressions</div>
+                        </div>
+
+                        <div class="hero-floating-badge hero-badge-2">
+                            <div class="badge-number">340%</div>
+                            <div class="badge-label">Average ROI</div>
+                        </div>
+
+                        <div class="hero-floating-badge hero-badge-3">
+                            <div class="badge-number">94%</div>
+                            <div class="badge-label">Retention Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TRUST BAR
+         ============================================ -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-bar-inner">
+                <div class="trust-item">
+                    <i class="fas fa-shield-halved"></i>
+                    Email-Only Communication
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-file-contract"></i>
+                    Fully Documented
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-clock"></i>
+                    24hr Response Time
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-lock"></i>
+                    Complete Transparency
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-handshake"></i>
+                    Accountability First
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         ABOUT NANCY
+         ============================================ -->
+    <section class="section about-section" id="about">
+        <div class="container">
+            <div class="about-inner">
+                <div class="about-image-wrapper" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="about-image">
+                        <img src="Nancy..jpg" alt="Nancy Shelly - Book Specialist Marketer">
+                        <div class="about-image-overlay">
+                            <h4>Nancy Shelly</h4>
+                            <p>Book Specialist Marketer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-content" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="section-badge"><i class="fas fa-user"></i> About The Architect</div>
+                    <h3>I Don't Run Promotions. I Build <span class="highlight">Visibility Empires.</span></h3>
+                    <p>
+                        I'm Nancy Shelly — a Book Specialist Marketer who understands that the difference between a book that sells 500 copies and one that sells 50,000 isn't quality. It's infrastructure.
+                    </p>
+                    <p>
+                        After years of working with authors across 47+ genres, I've developed the Author Visibility Architecture™ system — a proprietary framework that builds permanent, compounding discovery systems for serious authors.
+                    </p>
+                    <p>
+                        I don't do phone calls. I don't do generic promotions. Everything I do is documented via email — transparent, accountable, and built to last. When you work with me, you get strategic infrastructure that keeps working long after our project is complete.
+                    </p>
+
+                    <div class="about-stats">
+                        <div class="about-stat" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="stat-number counter" data-target="47">0</div>
+                            <div class="stat-label">M+ Impressions</div>
+                        </div>
+                        <div class="about-stat" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="stat-number counter" data-target="340">0</div>
+                            <div class="stat-label">% Average ROI</div>
+                        </div>
+                        <div class="about-stat" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="stat-number counter" data-target="94">0</div>
+                            <div class="stat-label">% Retention</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         THE PROBLEM SECTION
+         ============================================ -->
+    <section class="section problems-section" id="problems">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge"><i class="fas fa-exclamation-triangle"></i> The Brutal Truth</div>
+                <h2 class="section-title">Why 97% of Authors Never Reach <span class="highlight">More Than 500 Readers</span></h2>
+                <p class="section-subtitle">The brutal truth about book marketing that nobody wants to tell you — but you need to hear if you're serious about success.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="problems-grid">
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="problem-icon"><i class="fas fa-arrow-trend-down"></i></div>
+                    <div class="problem-number">Problem 01</div>
+                    <h3 class="problem-title">The Visibility Death Spiral</h3>
+                    <p class="problem-text">You launch with excitement, get 15-40 sales from people who already know you, then Amazon's window closes. Your ranking plummets from #15,000 to #350,000. Sales drop to 0-3 per day. The algorithm has decided your book isn't worth showing. You're now competing with 4 million titles for scraps of attention — and losing.</p>
+                </div>
+
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="problem-icon"><i class="fas fa-shuffle"></i></div>
+                    <div class="problem-number">Problem 02</div>
+                    <h3 class="problem-title">The Random Tactics Trap</h3>
+                    <p class="problem-text">Monday: Instagram post (12 likes, 0 sales). Wednesday: Facebook ad ($50 spent, 1 sale). Friday: Promo site submission (rejected). This is "Random Acts of Marketing" — disconnected tactics with no strategic architecture, no compounding effects, no systematic visibility. It's exhausting, demoralizing, and financially devastating.</p>
+                </div>
+
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="problem-icon"><i class="fas fa-house-crack"></i></div>
+                    <div class="problem-number">Problem 03</div>
+                    <h3 class="problem-title">The Platform Dependency Trap</h3>
+                    <p class="problem-text">Building your entire business on Amazon-only distribution, Facebook-dependent traffic, or BookBub as your only source isn't a business — it's a house of cards. One policy change, one algorithm update, one rejected submission, and your income disappears overnight. You need to own your traffic through strategic infrastructure.</p>
+                </div>
+
+                <div class="problem-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="problem-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="problem-number">Problem 04</div>
+                    <h3 class="problem-title">The Launch-and-Abandon Mistake</h3>
+                    <p class="problem-text">The first 30 days determine your book's entire algorithmic future. If you abandon promotional efforts after week 3, Amazon sets your "natural" baseline at 2 copies/day — permanently. That baseline becomes nearly impossible to change. Book marketing isn't an event. It's permanent infrastructure running 24/7/365.</p>
+                </div>
+
+                <div class="problem-card problem-card-full" data-aos="fade-up" data-aos-delay="500">
+                    <div class="problem-icon"><i class="fas fa-book-open"></i></div>
+                    <div class="problem-number">Problem 05</div>
+                    <h3 class="problem-title">The "One Book at a Time" Blindspot</h3>
+                    <p class="problem-text">Your entire catalog is a visibility ecosystem where each book amplifies the others. Readers who discover Book 3 go back and buy Books 1-2. Free Book 1 drives full-price sales of Books 2-7. Email lists built from all books create instant launch velocity. Each new release triggers Amazon to re-promote your entire catalog. But this only works with catalog-level visibility infrastructure — not individual book-level tactics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         VISIBILITY GAPS
+         ============================================ -->
+    <section class="section visibility-section" id="visibility">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge"><i class="fas fa-magnifying-glass-chart"></i> The Gaps</div>
+                <h2 class="section-title">How Many Readers Are You <span class="highlight">Losing Every Month?</span></h2>
+                <p class="section-subtitle">Right now, thousands of readers are searching for books exactly like yours. They're ready to buy. They have credit cards out. And they will never find you.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="visibility-timeline">
+                <div class="gap-item" data-aos="fade-right">
+                    <div class="gap-dot"></div>
+                    <div class="gap-content">
+                        <div class="gap-number">Gap 01</div>
+                        <h4 class="gap-title">Category Positioning Gap</h4>
+                        <p class="gap-text">You're competing in categories with 64,000+ titles where you'll never reach page 1. Strategic repositioning to winnable categories can increase organic discovery by 10.5X overnight — same book, same sales, dramatically more visibility.</p>
+                    </div>
+                </div>
+
+                <div class="gap-item" data-aos="fade-left">
+                    <div class="gap-dot"></div>
+                    <div class="gap-content">
+                        <div class="gap-number">Gap 02</div>
+                        <h4 class="gap-title">Algorithm Momentum Gap</h4>
+                        <p class="gap-text">Amazon rewards momentum (acceleration) not absolute numbers. A book going from 5 to 15 sales/day gets more promotion than one consistently selling 30/day. Most authors create flat velocity. Infrastructure creates deliberate acceleration spikes.</p>
+                    </div>
+                </div>
+
+                <div class="gap-item" data-aos="fade-right">
+                    <div class="gap-dot"></div>
+                    <div class="gap-content">
+                        <div class="gap-number">Gap 03</div>
+                        <h4 class="gap-title">Reader Capture Gap</h4>
+                        <p class="gap-text">For every 100 readers who discover your book, 85-95 will never buy from you again. With strategic reader magnet infrastructure capturing at 50-70%, the same sales generate $72,180 more over 3 years — purely from owned audience.</p>
+                    </div>
+                </div>
+
+                <div class="gap-item" data-aos="fade-left">
+                    <div class="gap-dot"></div>
+                    <div class="gap-content">
+                        <div class="gap-number">Gap 04</div>
+                        <h4 class="gap-title">Network Isolation Gap</h4>
+                        <p class="gap-text">Successful authors leverage partner networks that 10-50X their reach. Newsletter swaps, cross-promotion groups, and reader magnet bundles give access to 100,000-500,000 targeted readers. Solo authors can't reach them.</p>
+                    </div>
+                </div>
+
+                <div class="gap-item" data-aos="fade-right">
+                    <div class="gap-dot"></div>
+                    <div class="gap-content">
+                        <div class="gap-number">Gap 05</div>
+                        <h4 class="gap-title">Sustainability Gap</h4>
+                        <p class="gap-text">Promotional spikes followed by collapse = wasted momentum. Infrastructure-based authors see 5X more annual sales because each effort builds on the last instead of starting from zero. Compound growth beats sprint-and-crash every time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         INFRASTRUCTURE APPROACH
+         ============================================ -->
+    <section class="section infrastructure-section" id="infrastructure">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge"><i class="fas fa-building"></i> The Solution</div>
+                <h2 class="section-title">Why Infrastructure Beats <span class="highlight">Promotion Every Time</span></h2>
+                <p class="section-subtitle">The fundamental difference between authors who build sustainable careers and authors who burn out chasing temporary spikes.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <!-- Comparison -->
+            <div class="infra-comparison">
+                <div class="infra-card wrong" data-aos="fade-right" data-aos-delay="200">
+                    <div class="infra-card-badge">
+                        <i class="fas fa-times-circle"></i>
+                        The Promotion Mindset
+                    </div>
+                    <h4>What Most Authors Do (And Why It Fails)</h4>
+                    <ul class="infra-list">
+                        <li><i class="fas fa-times"></i>Temporary spikes that collapse back to baseline</li>
+                        <li><i class="fas fa-times"></i>Each effort starts from zero — no compounding</li>
+                        <li><i class="fas fa-times"></i>Random disconnected tactics with no strategy</li>
+                        <li><i class="fas fa-times"></i>Exhausting, expensive, diminishing returns</li>
+                        <li><i class="fas fa-times"></i>Event-based thinking: "I need to promote this launch"</li>
+                        <li><i class="fas fa-times"></i>12-month result: 1,650 sales (spike/collapse cycle)</li>
+                    </ul>
+                </div>
+
+                <div class="infra-card right" data-aos="fade-left" data-aos-delay="300">
+                    <div class="infra-card-badge">
+                        <i class="fas fa-check-circle"></i>
+                        The Infrastructure Mindset
+                    </div>
+                    <h4>What Professional Authors Build (And Why It Wins)</h4>
+                    <ul class="infra-list">
+                        <li><i class="fas fa-check"></i>Permanent systems that work 24/7 automatically</li>
+                        <li><i class="fas fa-check"></i>Each effort compounds on previous success</li>
+                        <li><i class="fas fa-check"></i>Strategic architecture where elements amplify each other</li>
+                        <li><i class="fas fa-check"></i>Sustainable, scalable, increasing returns</li>
+                        <li><i class="fas fa-check"></i>Systems thinking: "I need permanent discovery architecture"</li>
+                        <li><i class="fas fa-check"></i>12-month result: 8,340 sales (compounding baseline growth)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Infrastructure Layers -->
+            <div class="section-header" data-aos="fade-up" style="margin-top: 20px;">
+                <h3 class="section-title" style="font-size: 2rem;">The 7 Layers of <span class="highlight">Author Visibility Architecture™</span></h3>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="infra-layers">
+                <div class="infra-layer" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="infra-layer-icon"><i class="fas fa-cube"></i></div>
+                    <h5>Foundation</h5>
+                    <p>Category positioning, metadata optimization, pricing strategy, review systems</p>
+                </div>
+
+                <div class="infra-layer" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="infra-layer-icon"><i class="fas fa-compass"></i></div>
+                    <h5>Discovery</h5>
+                    <p>Reader magnets, email capture funnels, landing pages, automated delivery</p>
+                </div>
+
+                <div class="infra-layer" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="infra-layer-icon"><i class="fas fa-bullhorn"></i></div>
+                    <h5>Amplification</h5>
+                    <p>Partnership networks, newsletter swaps, bundle placements, promo coordination</p>
+                </div>
+
+                <div class="infra-layer" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="infra-layer-icon"><i class="fas fa-bolt"></i></div>
+                    <h5>Momentum</h5>
+                    <p>Launch engineering, algorithmic triggers, category climbing, Also Bought positioning</p>
+                </div>
+
+                <div class="infra-layer" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="infra-layer-icon"><i class="fas fa-infinity"></i></div>
+                    <h5>Sustainability</h5>
+                    <p>Evergreen promos, email nurture automation, seasonal optimization, catalog refresh</p>
+                </div>
+
+                <div class="infra-layer" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="infra-layer-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h5>Analytics</h5>
+                    <p>Performance tracking, ROI attribution, competitive benchmarking, data-driven decisions</p>
+                </div>
+
+                <div class="infra-layer" data-aos="zoom-in" data-aos-delay="700" style="grid-column: 1 / -1; max-width: 380px; margin: 0 auto;">
+                    <div class="infra-layer-icon"><i class="fas fa-expand"></i></div>
+                    <h5>Expansion</h5>
+                    <p>Series architecture, format optimization, international growth, platform diversification</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FEATURED AUTHORS
+         ============================================ -->
+    <section class="section featured-section" id="authors">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge"><i class="fas fa-crown"></i> Success Stories</div>
+                <h2 class="section-title">Featured Authors: <span class="highlight">Infrastructure in Action</span></h2>
+                <p class="section-subtitle">These authors invested in professional visibility infrastructure. Here's what that looks like in practice.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="featured-grid">
+
+                <!-- Author 1: James Victor -->
+                <div class="featured-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="featured-card-header">
+                        <a href="https://www.amazon.com/s?k=James+Victor+author" target="_blank" rel="noopener" class="featured-author-img-wrapper" title="View on Amazon">
+                            <img src="James pic.webp" alt="James Victor" class="featured-author-img">
+                        </a>
+                        <h3 class="featured-author-name">James Victor</h3>
+                        <a href="mailto:jamesdavidvictor6@gmail.com" class="featured-author-email">
+                            <i class="fas fa-envelope"></i> jamesdavidvictor6@gmail.com
+                        </a>
+                    </div>
+
+                    <div class="featured-book-wrapper">
+                        <a href="https://www.amazon.com/s?k=James+Victor+author" target="_blank" rel="noopener" class="featured-book-img-link" title="View on Amazon">
+                            <img src="James book.webp" alt="James Victor's Book" class="featured-book-img">
+                        </a>
+                        <br>
+                        <a href="https://www.amazon.com/s?k=James+Victor+author" target="_blank" rel="noopener" class="featured-amazon-btn">
+                            <i class="fab fa-amazon"></i>
+                            View on Amazon
+                        </a>
+                    </div>
+
+                    <div class="featured-card-footer">
+                        <p class="featured-testimonial">"Nancy's visibility infrastructure completely transformed my author career. The systematic approach to discovery, positioning, and reader capture created compounding results I never thought possible. My book went from invisible to consistently ranking in my categories."</p>
+                        <div class="featured-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Author 2: Kate Cullen -->
+                <div class="featured-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="featured-card-header">
+                        <a href="https://www.amazon.com/s?k=Kate+Cullen+author" target="_blank" rel="noopener" class="featured-author-img-wrapper" title="View on Amazon">
+                            <img src="kate pic.webp" alt="Kate Cullen" class="featured-author-img">
+                        </a>
+                        <h3 class="featured-author-name">Kate Cullen</h3>
+                        <a href="mailto:katecullen473@gmail.com" class="featured-author-email">
+                            <i class="fas fa-envelope"></i> katecullen473@gmail.com
+                        </a>
+                    </div>
+
+                    <div class="featured-book-wrapper">
+                        <a href="https://www.amazon.com/s?k=Kate+Cullen+author" target="_blank" rel="noopener" class="featured-book-img-link" title="View on Amazon">
+                            <img src="kate book.webp" alt="Kate Cullen's Book" class="featured-book-img">
+                        </a>
+                        <br>
+                        <a href="https://www.amazon.com/s?k=Kate+Cullen+author" target="_blank" rel="noopener" class="featured-amazon-btn">
+                            <i class="fab fa-amazon"></i>
+                            View on Amazon
+                        </a>
+                    </div>
+
+                    <div class="featured-card-footer">
+                        <p class="featured-testimonial">"Before Nancy, I was the definition of invisible — great reviews from the few readers who found me, but ranking nowhere. She built a complete visibility system: strategic category repositioning, network amplification, and reader capture infrastructure. Everything changed."</p>
+                        <div class="featured-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Author 3: Rachael C. Duncan -->
+                <div class="featured-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="featured-card-header">
+                        <a href="https://www.amazon.com/s?k=Rachael+C+Duncan+author" target="_blank" rel="noopener" class="featured-author-img-wrapper" title="View on Amazon">
+                            <img src="R.c pic.webp" alt="Rachael C. Duncan" class="featured-author-img">
+                        </a>
+                        <h3 class="featured-author-name">Rachael C. Duncan</h3>
+                        <a href="mailto:authorrachaelduncan@gmail.com" class="featured-author-email">
+                            <i class="fas fa-envelope"></i> authorrachaelduncan@gmail.com
+                        </a>
+                    </div>
+
+                    <div class="featured-book-wrapper">
+                        <a href="https://www.amazon.com/s?k=Rachael+C+Duncan+author" target="_blank" rel="noopener" class="featured-book-img-link" title="View on Amazon">
+                            <img src="R.c book.webp" alt="Rachael C. Duncan's Book" class="featured-book-img">
+                        </a>
+                        <br>
+                        <a href="https://www.amazon.com/s?k=Rachael+C+Duncan+author" target="_blank" rel="noopener" class="featured-amazon-btn">
+                            <i class="fab fa-amazon"></i>
+                            View on Amazon
+                        </a>
+                    </div>
+
+                    <div class="featured-card-footer">
+                        <p class="featured-testimonial">"Nancy didn't just promote my book — she built a permanent visibility ecosystem for my entire catalog. Strategic positioning, partnership networks, reader magnet funnels, and sustained algorithmic momentum. My email list exploded and sales compounded month over month. This is infrastructure, not promotion."</p>
+                        <div class="featured-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Below Authors -->
+            <div style="text-align: center; margin-top: 60px;" data-aos="fade-up">
+                <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 25px; max-width: 650px; margin-left: auto; margin-right: auto;">
+                    Interested in becoming a featured author? I work with a limited number of authors — because each placement requires significant strategic investment.
+                </p>
+                <a href="#contact" class="btn-primary">
+                    <i class="fas fa-envelope"></i>
+                    Inquire About Featured Placement
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         HOW IT WORKS / PROCESS
+         ============================================ -->
+    <section class="section process-section" id="process">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge"><i class="fas fa-route"></i> The Process</div>
+                <h2 class="section-title">Simple. Strategic. <span class="highlight">Documented.</span></h2>
+                <p class="section-subtitle">No phone calls. No confusion. Just results delivered via email — every step transparent and accountable.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="process-step-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <div class="process-step-number">1</div>
+                    <h4>Initial Assessment</h4>
+                    <p>Email detailed information about your book, current situation, and goals. I respond within 24 hours with strategic questions to understand your specific needs.</p>
+                </div>
+
+                <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="process-step-icon"><i class="fas fa-chess"></i></div>
+                    <div class="process-step-number">2</div>
+                    <h4>Custom Strategy</h4>
+                    <p>I create a comprehensive visibility infrastructure plan specific to your book — what we'll build, why each element matters, timeline, and investment required.</p>
+                </div>
+
+                <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="process-step-icon"><i class="fas fa-magnifying-glass"></i></div>
+                    <div class="process-step-number">3</div>
+                    <h4>Strategy Review</h4>
+                    <p>You review the proposed infrastructure plan. Ask questions. Clarify details. Ensure you understand exactly what we're building and why before moving forward.</p>
+                </div>
+
+                <div class="process-step" data-aos="fade-up" data-aos-delay="400">
+                    <div class="process-step-icon"><i class="fas fa-hammer"></i></div>
+                    <div class="process-step-number">4</div>
+                    <h4>Implementation</h4>
+                    <p>Once approved, we build your visibility infrastructure according to the agreed timeline with weekly email updates documenting every step of progress.</p>
+                </div>
+
+                <div class="process-step" data-aos="fade-up" data-aos-delay="500">
+                    <div class="process-step-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="process-step-number">5</div>
+                    <h4>Optimization</h4>
+                    <p>As systems run, we monitor performance and optimize based on data. Infrastructure evolves to maximize effectiveness and compound your results over time.</p>
+                </div>
+
+                <div class="process-step" data-aos="fade-up" data-aos-delay="600">
+                    <div class="process-step-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="process-step-number">6</div>
+                    <h4>Results & Report</h4>
+                    <p>Receive comprehensive campaign report with all metrics, achievements, and strategic recommendations for ongoing success — all documented via email.</p>
+                </div>
+            </div>
+
+            <div class="process-email-note" data-aos="fade-up">
+                <p><i class="fas fa-shield-halved"></i> <strong>All communication via email only.</strong> Every strategy, every update, every result — permanently documented for complete transparency and accountability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         NANCY PHILOSOPHY / QUOTE
+         ============================================ -->
+    <section class="section philosophy-section">
+        <div class="container">
+            <div class="philosophy-inner">
+                <div class="philosophy-image" data-aos="fade-right">
+                    <img src="Nancy..jpg" alt="Nancy Shelly">
+                </div>
+
+                <div class="philosophy-content" data-aos="fade-left">
+                    <div class="section-badge"><i class="fas fa-quote-left"></i> My Philosophy</div>
+                    <blockquote class="philosophy-quote">
+                        Your book deserves to be read. Readers deserve to discover it. The gap between a great book and a successful book isn't quality — it's visibility infrastructure. I bridge that gap with systems that compound, strategies that sustain, and architecture that transforms invisible authors into unavoidable ones.
+                    </blockquote>
+
+                    <div class="philosophy-author">
+                        <img src="Nancy..jpg" alt="Nancy Shelly">
+                        <div class="philosophy-author-info">
+                            <h5>Nancy Shelly</h5>
+                            <span>Book Specialist Marketer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FAQ SECTION
+         ============================================ -->
+    <section class="section faq-section" id="faq">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge"><i class="fas fa-circle-question"></i> FAQ</div>
+                <h2 class="section-title">Frequently Asked <span class="highlight">Questions</span></h2>
+                <p class="section-subtitle">Everything you need to know about working with me — answered honestly.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>How do you communicate with clients?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>All communication is conducted via email. This ensures complete documentation of all strategies, recommendations, timelines, and results. You'll have a permanent record of everything — fully transparent and accountable. I respond within 24 hours on weekdays.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="150">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>What genres do you work with?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>I work with all fiction and non-fiction genres across 47+ categories. My infrastructure approach adapts to genre-specific requirements — what works for romance differs from thrillers, business books, fantasy, and more. The strategic framework stays consistent while tactical execution varies by genre.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>Do you guarantee results?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>I guarantee execution of agreed-upon strategy and infrastructure building. Specific sales numbers or rankings depend on variables outside my control (algorithm changes, market conditions, book quality, timing). However, properly built visibility infrastructure consistently generates significantly better results than no infrastructure or random tactics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="250">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>How long does it take to see results?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Some elements show improvement within 7-14 days (category repositioning, metadata optimization). Others build over 30-90 days (email list growth, partnership networks). Complete visibility infrastructure typically shows compound results over 3-6 months. This is systematic infrastructure that builds permanent competitive advantages, not a quick-fix promotion.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>What if I'm a brand new author with no reviews?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>We can still build infrastructure. I'll recommend the optimal sequence: start with elements that don't require reviews (category positioning, metadata, reader magnet setup), implement ethical review strategies, then layer in tactics requiring review thresholds. Infrastructure is MORE critical when starting from zero, not less.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="350">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>What if I've tried marketing before and it didn't work?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Most authors who "tried marketing" used random disconnected tactics without systematic infrastructure. The question isn't "does marketing work" — it's "what specific infrastructure does YOUR book need?" Failed tactics reveal what NOT to do, which helps identify what WILL work. Email me what you tried — I can usually pinpoint exactly why it failed.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>How is this different from other book marketing services?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Most services offer one-off promotional events ("we'll email your book to our list"). These create temporary spikes without permanent infrastructure. I build systematic visibility architecture that generates ongoing discovery long after any individual event. It's the difference between renting visibility for a week versus owning visibility infrastructure permanently.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="450">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h4>How much does it cost?</h4>
+                        <div class="faq-toggle"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Every author's situation is unique — different genre, positioning, goals, and needs. I build custom infrastructure specific to YOUR book. Email me your book details and goals, and I'll respond with honest assessment, strategic recommendations, and transparent investment details tailored to your specific situation. No hidden fees, no surprises.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT / CTA SECTION
+         ============================================ -->
+    <section class="section contact-section" id="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-badge"><i class="fas fa-paper-plane"></i> Let's Connect</div>
+                <h2 class="section-title">Ready to Stop <span class="highlight">Being Invisible?</span></h2>
+                <p class="section-subtitle">Your book deserves to find its readers. Let's build the visibility infrastructure to make that happen.</p>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="contact-inner">
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>Let's Build Your <span class="highlight">Visibility Empire</span></h3>
+                    <p>
+                        You've invested hundreds of hours writing your book. You've paid for professional editing and cover design. Now it's time to invest in the infrastructure that makes sure readers actually find it. Email me your book details and I'll respond within 24 hours with honest strategic assessment.
+                    </p>
+
+                    <ul class="contact-details">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div><strong>Email:</strong> nancyshelly12@gmail.com</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <div><strong>Response Time:</strong> Within 24 hours (weekdays)</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-shield-halved"></i>
+                            <div><strong>Communication:</strong> Email only — fully documented</div>
+                        </li>
+                        <li>
+                            <i class="fas fa-globe"></i>
+                            <div><strong>Serving:</strong> Authors worldwide across 47+ genres</div>
+                        </li>
+                    </ul>
+
+                    <div class="contact-nancy-card">
+                        <img src="Nancy..jpg" alt="Nancy Shelly">
+                        <div>
+                            <h5>Nancy Shelly</h5>
+                            <span>Book Specialist Marketer</span>
+                            <p>Building Author Visibility Infrastructure since 2019</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper" data-aos="fade-left">
+                    <h4>Send Your Book Details</h4>
+                    <p>Fill out the form below and it will arrive directly in my inbox.</p>
+
+                    <form action="https://formspree.io/f/xaqayaaa" method="POST" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name *</label>
+                                <input type="text" id="name" name="name" placeholder="Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email *</label>
+                                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bookTitle">Book Title *</label>
+                                <input type="text" id="bookTitle" name="bookTitle" placeholder="Your Book Title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="genre">Genre *</label>
+                                <select id="genre" name="genre" required>
+                                    <option value="" disabled selected>Select Genre</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Thriller/Mystery">Thriller / Mystery</option>
+                                    <option value="Fantasy/Sci-Fi">Fantasy / Sci-Fi</option>
+                                    <option value="Historical Fiction">Historical Fiction</option>
+                                    <option value="Literary Fiction">Literary Fiction</option>
+                                    <option value="Young Adult">Young Adult</option>
+                                    <option value="Self-Help">Self-Help / Personal Development</option>
+                                    <option value="Business">Business / Entrepreneurship</option>
+                                    <option value="Biography/Memoir">Biography / Memoir</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amazonLink">Amazon Link (if published)</label>
+                            <input type="url" id="amazonLink" name="amazonLink" placeholder="https://amazon.com/dp/...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inquiry">Inquiry Type *</label>
+                            <select id="inquiry" name="inquiry" required>
+                                <option value="" disabled selected>What are you looking for?</option>
+                                <option value="Featured Author Placement">Featured Author Placement</option>
+                                <option value="Visibility Infrastructure">Visibility Infrastructure Partnership</option>
+                                <option value="Launch Strategy">Launch Strategy</option>
+                                <option value="Visibility Assessment">Visibility Gap Assessment</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Tell Me About Your Book & Goals *</label>
+                            <textarea id="message" name="message" placeholder="Include: current ranking, monthly sales, what you've tried, and what you hope to achieve in the next 6-12 months..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit">
+                            <i class="fas fa-paper-plane"></i>
+                            Send to Nancy's Inbox
+                        </button>
+
+                        <p class="form-note">
+                            <i class="fas fa-lock"></i> Your information is secure. I respond within 24 hours on weekdays.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="Nancy..jpg" alt="Nancy Shelly">
+                        <div class="footer-logo-text">
+                            <h4>Nancy Shelly</h4>
+                            <span>Book Specialist Marketer</span>
+                        </div>
+                    </div>
+                    <p>I don't run book promotions. I build systematic visibility architecture that transforms invisible books into reader magnets through strategic positioning, algorithmic optimization, network amplification, and compounding discovery systems.</p>
+                    <div class="footer-social">
+                        <a href="mailto:nancyshelly12@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About Nancy</a></li>
+                        <li><a href="#problems"><i class="fas fa-chevron-right"></i> The Problem</a></li>
+                        <li><a href="#infrastructure"><i class="fas fa-chevron-right"></i> Infrastructure</a></li>
+                        <li><a href="#authors"><i class="fas fa-chevron-right"></i> Featured Authors</a></li>
+                        <li><a href="#process"><i class="fas fa-chevron-right"></i> How It Works</a></li>
+                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Contact</h5>
+                    <ul>
+                        <li><a href="mailto:nancyshelly12@gmail.com"><i class="fas fa-envelope"></i> nancyshelly12@gmail.com</a></li>
+                        <li><a href="#contact"><i class="fas fa-clock"></i> 24hr Response Time</a></li>
+                        <li><a href="#"><i class="fas fa-shield-halved"></i> Email Only</a></li>
+                        <li><a href="#"><i class="fas fa-globe"></i> Worldwide Service</a></li>
+                    </ul>
+
+                    <h5 style="margin-top: 30px;">Email Subjects</h5>
+                    <ul>
+                        <li><a href="mailto:nancyshelly12@gmail.com?subject=FEATURED AUTHOR INQUIRY"><i class="fas fa-crown"></i> Featured Author</a></li>
+                        <li><a href="mailto:nancyshelly12@gmail.com?subject=PARTNERSHIP INQUIRY"><i class="fas fa-handshake"></i> Partnership</a></li>
+                        <li><a href="mailto:nancyshelly12@gmail.com?subject=VISIBILITY ASSESSMENT"><i class="fas fa-chart-line"></i> Assessment</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 Nancy Shelly — Book Specialist Marketing. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         SCROLL TO TOP
+         ============================================ -->
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+
+    <!-- ============================================
+         SCRIPTS
+         ============================================ -->
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // ============================================
+        // PRELOADER
+        // ============================================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('loaded');
+            }, 2200);
+        });
+
+        // ============================================
+        // AOS INIT
+        // ============================================
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 80,
+            delay: 0
+        });
+
+        // ============================================
+        // CUSTOM CURSOR
+        // ============================================
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorRing = document.getElementById('cursorRing');
+
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX - 4 + 'px';
+                cursorDot.style.top = e.clientY - 4 + 'px';
+                cursorRing.style.left = e.clientX + 'px';
+                cursorRing.style.top = e.clientY + 'px';
+            });
+
+            document.querySelectorAll('a, button, .faq-question, .featured-card, .problem-card').forEach(el => {
+                el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+            });
+        }
+
+        // ============================================
+        // FLOATING PARTICLES
+        // ============================================
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 4 + 1 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDuration = Math.random() * 20 + 15 + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ============================================
+        // NAVIGATION SCROLL
+        // ============================================
+        const nav = document.getElementById('nav');
+        const scrollTop = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+
+            if (window.scrollY > 500) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        // ============================================
+        // HAMBURGER MENU
+        // ============================================
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        function closeMobileNav() {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ============================================
+        // FAQ ACCORDION
+        // ============================================
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const faqAnswer = faqItem.querySelector('.faq-answer');
+            const isActive = faqItem.classList.contains('active');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.faq-answer').style.maxHeight = null;
+            });
+
+            // Open clicked if not already active
+            if (!isActive) {
+                faqItem.classList.add('active');
+                faqAnswer.style.maxHeight = faqAnswer.scrollHeight + 'px';
+            }
+        }
+
+        // ============================================
+        // COUNTER ANIMATION
+        // ============================================
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 70;
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(() => animateCounters(), 30);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Intersection Observer for counters
+        const counterSection = document.querySelector('.about-stats');
+        if (counterSection) {
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counterObserver.observe(counterSection);
+        }
+
+        // ============================================
+        // SMOOTH SCROLL FOR NAV LINKS
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // FORM SUBMISSION FEEDBACK
+        // ============================================
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                const submitBtn = this.querySelector('.form-submit');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.style.opacity = '0.7';
+                submitBtn.disabled = true;
+
+                // Re-enable after submission (Formspree handles redirect)
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully!';
+                    submitBtn.style.background = 'linear-gradient(135deg, #4caf50, #66bb6a)';
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.background = '';
+                        submitBtn.style.opacity = '1';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }, 2000);
+            });
+        }
+
+        // ============================================
+        // PARALLAX EFFECT ON HERO
+        // ============================================
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const heroImage = document.querySelector('.hero-image-container');
+            if (heroImage && window.innerWidth > 768) {
+                heroImage.style.transform = `translateY(${scrolled * 0.05}px)`;
+            }
+        });
+
+        // ============================================
+        // TYPED EFFECT ON HERO (subtle)
+        // ============================================
+        const heroTrustItems = document.querySelectorAll('.hero-trust-item');
+        heroTrustItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                item.style.transition = 'all 0.6s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 2500 + (index * 200));
+        });
+
+    </script>
+</body>
+</html>
